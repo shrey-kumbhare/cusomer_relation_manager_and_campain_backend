@@ -3,9 +3,6 @@ const { body, validationResult } = require("express-validator");
 
 exports.createCustomer = async (req, res) => {
   try {
-    console.log("[x] Received request to create customer with data:", req.body);
-
-    // Validation rules
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       console.error("[x] Validation error:", errors.array());
@@ -33,7 +30,6 @@ exports.createCustomer = async (req, res) => {
     await customer.save();
 
     res.status(201).json(customer);
-    console.log("[x] Response sent to client with status 201:", customer);
   } catch (err) {
     console.error("[x] Error creating customer:", err);
     res.status(400).json({ error: err.message });
@@ -54,7 +50,6 @@ exports.getCustomers = async (req, res) => {
     const customers = await Customer.find({});
 
     res.status(200).json(customers);
-    console.log("[x] Response sent to client with status 200:", customers);
   } catch (err) {
     console.error("[x] Error fetching customers:", err);
     res.status(500).json({ error: "Failed to fetch customers" });

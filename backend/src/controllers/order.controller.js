@@ -20,7 +20,6 @@ exports.createOrder = async (req, res) => {
 
   try {
     const { customerId, amount } = req.body;
-    console.log(`[x] Creating order with payload: ${JSON.stringify(req.body)}`);
 
     // Ensure customer exists
     const customer = await Customer.findById(customerId);
@@ -40,8 +39,7 @@ exports.createOrder = async (req, res) => {
     });
     await order.save(); // Save the order
 
-    res.status(201).json(order); // Send response with order data
-    console.log("[x] Response sent to client with status 201:", order);
+    res.status(201).json(order);
   } catch (err) {
     console.error(`[x] Error creating order: ${err.message}`);
     res.status(400).json({ error: err.message });
