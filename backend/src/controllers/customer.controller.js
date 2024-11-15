@@ -48,3 +48,15 @@ exports.validateCreateCustomer = [
     .isEmail()
     .withMessage("Email must be a valid email address"),
 ];
+
+exports.getCustomers = async (req, res) => {
+  try {
+    const customers = await Customer.find({});
+
+    res.status(200).json(customers);
+    console.log("[x] Response sent to client with status 200:", customers);
+  } catch (err) {
+    console.error("[x] Error fetching customers:", err);
+    res.status(500).json({ error: "Failed to fetch customers" });
+  }
+};
