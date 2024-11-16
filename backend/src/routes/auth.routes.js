@@ -17,6 +17,8 @@ router.get(
 );
 
 router.get("/status", (req, res) => {
+  console.log(req);
+  console.log(req.isAuthenticated());
   if (req.isAuthenticated()) {
     res.json({ isAuthenticated: true, name: req.user });
   } else {
