@@ -11,14 +11,22 @@ router.get(
   "/google/callback",
   passport.authenticate("google", { failureRedirect: "/login" }),
   (req, res) => {
-    // Successful authentication, redirect to the client application
+    if (req.isAuthenticated() && req.user) {
+      const userInfo = {
+        displayName: req.user.displayName,
+        email: req.user.email,
+      };
+      res.json({
+        userInfo: userInfo,
+        isAuthenticated: true,
+      });
+    }
     res.redirect(process.env.FRONTEND_PORT);
   }
 );
 
 router.get("/status", (req, res) => {
-  console.log(req);
-  console.log(req.isAuthenticated());
+  // console.log(req);
   if (req.isAuthenticated()) {
     res.json({ isAuthenticated: true, name: req.user });
   } else {
