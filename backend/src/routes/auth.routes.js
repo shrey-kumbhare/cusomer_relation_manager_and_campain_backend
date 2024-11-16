@@ -12,7 +12,7 @@ router.get(
   passport.authenticate("google", { failureRedirect: "/login" }),
   (req, res) => {
     // Successful authentication, redirect to the client application
-    res.redirect("http://localhost:3000/home");
+    res.redirect(process.env.FRONTEND_PORT);
   }
 );
 
