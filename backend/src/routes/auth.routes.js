@@ -13,11 +13,10 @@ router.get(
   (req, res) => {
     if (req.isAuthenticated() && req.user) {
       const frontendUrl = `${process.env.FRONTEND_URL}/auth/success`;
-      const redirectUrl = `${
-        process.env.FRONTEND_URL
-      }?isAuthenticated=true&displayName=${encodeURIComponent(
+      const redirectUrl = `${frontendUrl}?isAuthenticated=true&displayName=${encodeURIComponent(
         req.user.displayName
       )}&email=${encodeURIComponent(req.user.email)}`;
+      res.redirect(redirectUrl);
     }
     res.redirect(process.env.FRONTEND_PORT);
   }
