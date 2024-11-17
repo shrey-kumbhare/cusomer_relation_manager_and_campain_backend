@@ -12,7 +12,7 @@ router.get(
   passport.authenticate("google", { failureRedirect: "/login" }),
   (req, res) => {
     if (req.isAuthenticated() && req.user) {
-      const frontendUrl = `${process.env.FRONTEND_URL}/auth/success`;
+      const frontendUrl = `${process.env.FRONTEND_PORT}/auth/success`;
       const redirectUrl = `${frontendUrl}?isAuthenticated=true&displayName=${encodeURIComponent(
         req.user.displayName
       )}&email=${encodeURIComponent(req.user.email)}`;
