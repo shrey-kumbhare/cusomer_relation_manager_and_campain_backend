@@ -22,15 +22,6 @@ router.get(
   }
 );
 
-router.get("/status", (req, res) => {
-  // console.log(req);
-  if (req.isAuthenticated()) {
-    res.json({ isAuthenticated: true, name: req.user });
-  } else {
-    res.json({ isAuthenticated: false });
-  }
-});
-
 router.post("/logout", (req, res, next) => {
   req.logout((err) => {
     if (err) {
